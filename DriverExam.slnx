@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Driver.API/Driver.API.csproj" />
+  <Project Path="Driver.Common/Driver.Common.csproj" />
+  <Project Path="Driver.DTO/Driver.DTO.csproj" />
+  <Project Path="Driver.IService/Driver.IService.csproj" />
+  <Project Path="Driver.Service/Driver.Service.csproj" />
+  <Project Path="Driver.Test/Driver.Test.csproj" Id="afe8abd2-e17b-4f7b-871d-0bbe3c176890" />
+</Solution>
