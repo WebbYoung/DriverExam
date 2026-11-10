@@ -1,13 +1,47 @@
-# DriverExam · 驾考题库练习系统
+<h1 align="center">DriverExam</h1>
+<h3 align="center">驾考刷题：题库、判卷、错题统计</h3>
 
-驾考科目一 / 科目四的刷题系统。仓库里是同一个课题的**两代实现**：先做了 Windows 桌面客户端，后来把它重写成 Web API。
+<p align="center">
+  <img src="docs/banner.svg" alt="DriverExam" width="900" />
+</p>
+
+<p align="center">
+  <img alt=".NET" src="https://img.shields.io/badge/.NET-8%20%7C%209-512BD4" />
+  <img alt="Desktop" src="https://img.shields.io/badge/desktop-WinForms-7C4DFF" />
+  <img alt="Storage" src="https://img.shields.io/badge/storage-SQLite%20%7C%20MySQL-003B57" />
+  <a href="https://github.com/WebbYoung/DriverExam/commits/master"><img alt="Last commit" src="https://img.shields.io/github/last-commit/WebbYoung/DriverExam" /></a>
+</p>
+
+---
+
+科目一 505 题、科目四 40 题，支持顺序练习、章节跳转、提交判卷，以及正确 / 错误 / 正确率 / 进度的累计统计。题库是纯文本，直接放在仓库里，换题不用改代码。
+
+仓库里是同一个课题的**两代实现**：先做了一个 WinForms 桌面客户端（直连 MySQL 存账号与进度），后来把它重写成 ASP.NET Core 8 Web API（EF Core + SQLite）。两代共用同一套题库格式和实体语义，所以放在一个仓库里维护 —— `desktop/` 是历史客户端，根目录是重写后的服务端。
+
+有一点要说清楚：**两代目前各自独立运行**，桌面端还没有改成调用 API，服务端也没有对应客户端。合并只是让两份代码待在一起，逻辑上尚未打通；要补什么写在[已知限制](#已知限制与后续路线)里。
+
+---
+
+**想直接刷题？**<br />
+Windows 上打开 [`desktop/DriverExamMax.sln`](desktop/DriverExamMax.sln) 编译运行。题库随构建复制到输出目录，不用另外准备。
+
+**想跑服务端接口？**<br />
+`dotnet run --project Driver.API`，然后打开 `/swagger`；完整步骤见[服务端](#服务端)。
+
+**想换成自己的题库？**<br />
+改 [`desktop/DriverExamMax/Resources/`](desktop/DriverExamMax/Resources/) 下的 `Subject1/` 与 `Subject4/`，格式见[题库数据](#题库数据)。
+
+**想找第一代独立仓库？**<br />
+[DriverExamGuide](https://github.com/WebbYoung/DriverExamGuide) 已归档，只读留档，代码与这里一致。
+
+---
+
+## 两代实现
 
 | 代 | 位置 | 形态 | 数据 | 前端 |
 | --- | --- | --- | --- | --- |
 | 第一代 · 2025-09 | [`desktop/`](desktop/) | WinForms 桌面端 | MySQL 存账号与答题进度，题库为内置文件 | 就是客户端本体 |
 | 第二代 · 2025-12 | [`Driver.API/`](Driver.API/) 等 | ASP.NET Core 8 Web API | EF Core + SQLite | 仅 Swagger，客户端未重写 |
-
-两代共用同一套题库格式与实体语义（题干 / 选项 / 正确答案 / 解析、答题进度），所以合并在一个仓库里维护：`desktop/` 是历史客户端，根目录是重写后的服务端。两者目前**各自独立运行**，桌面端仍直连 MySQL、尚未改为调用 API —— 迁移边界见[已知限制](#已知限制与后续路线)。
 
 ## 目录结构
 
