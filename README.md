@@ -2,7 +2,7 @@
 <h3 align="center">驾考刷题：题库、判卷、错题统计</h3>
 
 <p align="center">
-  <img src="docs/banner.svg" alt="DriverExam" width="900" />
+  <img src="docs/banner.svg?v=2" alt="DriverExam" width="900" />
 </p>
 
 <p align="center">
